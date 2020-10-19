@@ -1,9 +1,30 @@
 ---
-title: "..."
-author: "..."
-date: "..."
+title: "Découverte du jeu de données portant sur la biométrie d'oursins"
+author: "Elodie Audoan"
+date: "2020-10-12"
 output: html_notebook
 ---
+
+
+# Introduction
+
+L'étude concerne l'analyse des données, recueillies par le professeur Philippe GrosJean, portant sur la croissance des oursins violets (*Paracentrotus lividus*) provenant de deux milieux : la pêche et l'aquaculture.
+
+
+# Matériel et méthodes
+
+L'analyse des données et la rédaction de ce rapport sont réalisées avec `r R.version.string` et RStudio version `r rstudioapi::versionInfo()$version` `r if (file.exists("/etc/svbox")) paste("dans", readLines("/etc/svbox")[1])`.
+
+Les oursins ont deux origines respectives. Une moitié provient de la pêche, celle-ci a été récoltée sur le terrain de Morgat en Bretagne. L'autre moitié est une espèce provenant d'aquaculture dans la station marine de Luc-sur-Mer en Normandie. La grande majorité des parents de ceux-ci sont issus du terrain de Morgat.
+
+Tous les individus ont été récoltés en 2 temps. Une première fois en septembre et une deuxième fois en mars. Procéder de la sorte permet de contrer les variations saisonnières potentielles.
+
+Les oursins récoltés par professeur Grosjean ont été mesurés à l'aide d'un pied à coulisse? Ils ont également été pesés. Les mesures sont exprimées en millimètres, les masses sont exprimées en grammes.
+
+
+# Résultats
+
+Le jeu de données possède 19 variables.
 
 ```{r setup}
 SciViews::R
@@ -14,4 +35,76 @@ options(data.io_lang = "fr") # Labels en français
 ```{r importation}
 urchin <- read("urchin_bio", package = "data.io")
 ```
+
+```{r}
+chart(urchin, formula = height ~ weight %col=% origin ) +
+  geom_point()
+
+```
+
+Ce graphique permet de démontrer que les oursins provenant d'élevage ont une masse totale plus élevée que les individus pêchés pour une même hauteur.
+
+```{r}
+chart(urchin, formula = solid_parts ~ buoyant_weight %col=% origin ) +
+  geom_point(na.rm = TRUE)
+```
+Nous observons que les individus pêchés possèdent une masse inférieure à celle des individus issus de l'aquaculture.
+De plus, ce graphique démontre que, pour tous les individus, la masse des parties solides est généralement 3 fois plus grande que la masse immergée.
+
+```{r}
+chart(urchin, formula = weight ~ buoyant_weight %col=% origin ) +
+  geom_point(na.rm = TRUE)
+```
+
+
+```{r}
+chart(urchin, formula = integuments ~ dry_integuments %col=% origin) +
+  geom_point(na.rm = TRUE)
+```
+
+
+```{r}
+chart(urchin, formula = gonads ~ dry_gonads %col=% origin) +
+  geom_point(na.rm = TRUE)
+```
+
+
+
+```{r}
+chart(urchin, formula = digestive_tract ~ dry_digestive_tract %col=% origin) +
+  geom_point(na.rm = TRUE)
+```
+
+```{r}
+chart(urchin, formula = diameter1 ~ diameter2 %col=% origin) +
+  geom_point()
+```
+
+
+```{r}
+chart(urchin, formula = diameter1 ~ height %col=% origin) +
+  geom_point()
+```
+
+
+
+# Discussion
+
+*Paracentrotus lividus* 
+
+
+# Conclusion
+
+*Paracentrotus lividus*
+
+
+# Information système
+
+```{r system}
+sessioninfo::session_info()
+```
+
+# Bibliographie
+
+
 
