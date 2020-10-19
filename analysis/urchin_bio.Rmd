@@ -1,0 +1,17 @@
+---
+title: "..."
+author: "..."
+date: "..."
+output: html_notebook
+---
+
+```{r setup}
+SciViews::R
+options(data.io_lang = "fr") # Labels en français
+```
+
+
+```{r importation}
+urchin <- read("urchin_bio", package = "data.io")
+```
+
